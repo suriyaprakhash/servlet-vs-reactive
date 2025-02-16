@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.suriyaprakhash</groupId>
-    <artifactId>reactive-web</artifactId>
+    <artifactId>servlet-vs-reactive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>reactive-web</name>
+    <name>servlet-vs-reactive</name>
     <description>Demo project for Spring Boot</description>
     <url/>
     <licenses>
@@ -125,7 +125,7 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling-maven-plugin.version}</version>
                 <configuration>
-                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.HugeFileNio</simulationClass>
+                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.HugeFileSimulationBioStream</simulationClass>
                 </configuration>
             </plugin>
 

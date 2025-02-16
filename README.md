@@ -6,17 +6,17 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 
 - Run the following for JFR,
 ```
-java -Dserver.port=8081 -XX:StartFlightRecording=duration=200s,filename=flight.jfr -jar .\target\reactive-web.jar
+java -Dserver.port=8081 -XX:StartFlightRecording=duration=200s,filename=flight.jfr -jar .\target\servlet-vs-reactive.jar
 ```
 
 - Run with glowroot,
 ```
-java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -jar .\target\reactive-web.jar
+java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -jar .\target\servlet-vs-reactive.jar
 ```
 
 - With both,
 ```
-java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -XX:StartFlightRecording=duration=60s,filename=flight.jfr -jar .\target\reactive-web.jar
+java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -XX:StartFlightRecording=duration=60s,filename=flight.jfr -jar .\target\servlet-vs-reactive.jar
 ```
 
 ## Load with Gatling
