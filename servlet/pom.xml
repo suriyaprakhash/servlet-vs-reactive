@@ -15,7 +15,32 @@
   <name>servlet app</name>
   <packaging>jar</packaging>
 
+  <properties>
+<!--    <reactor-core.version>3.6.11</reactor-core.version>-->
+  </properties>
+
   <dependencies>
+
+    <!-- for bio tomcat web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+
+<!--    &lt;!&ndash; TODO: Check see if we need webflux or just reactor core is fine&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>io.projectreactor</groupId>-->
+<!--      <artifactId>reactor-core</artifactId>-->
+<!--      <version>${reactor-core.version}</version>-->
+<!--      <scope>compile</scope>-->
+<!--    </dependency>-->
+
+<!--    &lt;!&ndash; this is for the streaming response body - can be commented while using starter-web &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-webmvc</artifactId>-->
+<!--    </dependency>-->
 
   </dependencies>
 

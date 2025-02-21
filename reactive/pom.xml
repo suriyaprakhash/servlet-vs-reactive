@@ -15,8 +15,24 @@
   <name>reactive app</name>
   <packaging>jar</packaging>
 
+
+  <properties>
+    <spring-webflux.version>6.1.14</spring-webflux.version>
+  </properties>
+
   <dependencies>
 
+    <!-- brings in reactive netty server-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+    <!-- this is for the streaming response body to see servlet streaming response body -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
