@@ -31,7 +31,7 @@
 
   <dependencies>
 
-    <!-- this is required for web client calls and flux usage -->
+    <!-- this is required for netty & tomcat to make web client calls and flux usage -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webflux</artifactId>
