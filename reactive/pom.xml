@@ -35,4 +35,8 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <finalName>ReactiveWebApplication</finalName>
+  </build>
+
 </project>

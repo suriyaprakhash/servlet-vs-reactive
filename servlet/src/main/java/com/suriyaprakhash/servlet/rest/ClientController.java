@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class ClientController {
 
-    String BIO_URL = "http://localhost:8081/server/bio";
+    String BIO_URL = "http://localhost:8080/server/bio";
     WebClient webClient = WebClient.create();
 
     @GetMapping("bio")

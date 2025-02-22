@@ -44,4 +44,8 @@
 
   </dependencies>
 
+  <build>
+    <finalName>ServletWebApplication</finalName>
+  </build>
+
 </project>

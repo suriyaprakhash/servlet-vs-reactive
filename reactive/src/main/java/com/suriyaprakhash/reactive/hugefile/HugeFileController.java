@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class HugeFileController {
 
 
-    String filePath = "ignore-test-files/";
+    String filePath = "../ignore-test-files/";
     String fileName = "150MB";
     String fileExtension = "csv";
     int bufferByteSize = 8192; // Adjust buffer size as needed
