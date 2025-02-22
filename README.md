@@ -22,3 +22,10 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 ## Test
 
 Check the respective project on how to test them
+
+
+# TODO
+
+- Compose Dockerfile & volume in the 150MB file & run both
+- Add DB
+- Write gatling simulation to test volumes
