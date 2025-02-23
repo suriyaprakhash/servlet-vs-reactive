@@ -55,7 +55,7 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-maven-plugin.version}</version>
         <configuration>
-          <simulationName>reactive.simulation.HugeFileSimulation</simulationName>
+          <simulationClass>reactive.simulation.HugeFileSimulation</simulationClass>
         </configuration>
       </plugin>
 

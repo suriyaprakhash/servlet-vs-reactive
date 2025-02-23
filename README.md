@@ -19,7 +19,12 @@ Start the build in the parent root folder,
 ```
 ./mvnw clean package
 ```
-builds both **servlet** and **reactive**
+builds both **servlet** and **reactive**. 
+
+Alternatively, pass **--projects=servlet** to build only one specific module or pass in both,
+```
+./mvnw --projects=servlet,reactive clean package
+```
 
 Run **servlet**,
 
@@ -32,7 +37,6 @@ Run **reactive**,
 ```
 java -XX:SharedArchiveFile=application.jsa -D"hugefile.path"=ignore-test-files/  -jar reactive/target/ReactiveWebApplication.jar 
 ```
-
 
 ### Docker
 
@@ -68,12 +72,15 @@ here,
 - -v - bind mount - host_path:container_path
 - -e - Spring @Value property for path in the application
 
-## Test
+## Gatling tests 
 
 Check the respective project on how to test them
 
+```
+.\mvnw.cmd --projects=servlet,reactive gatling:test
+```
 
 # TODO
 
+- Toxiproxy steps
 - Add DB
-- Write gatling simulation to test volumes
