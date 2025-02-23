@@ -18,6 +18,15 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 
 ### Docker
 
+Build for **servlet** app,
+```
+docker build --build-arg  PROJECT=servlet -f Dockerfile -t servlet-web-application:1.0 .
+```
+
+Build for **reactive** app,
+```
+docker build --build-arg  PROJECT=reactive -f Dockerfile -t reactive-web-application:1.0 .
+```
 
 ## Test
 

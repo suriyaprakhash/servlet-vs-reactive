@@ -46,6 +46,18 @@
 
   <build>
     <finalName>ServletWebApplication</finalName>
+
+    <plugins>
+      <plugin>
+        <!-- This spring boot plugin adds the manifest - which is required to run the spring boot from in cmd line -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.suriyaprakhash.servlet.ServletWebApplication</mainClass>
+          <layout>JAR</layout>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
 </project>

@@ -1,0 +1,4 @@
+*.md
+ignore-test-files
+.gitignore
+**/target
