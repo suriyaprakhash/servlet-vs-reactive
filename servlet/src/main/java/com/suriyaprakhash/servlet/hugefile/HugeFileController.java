@@ -1,6 +1,7 @@
 package com.suriyaprakhash.servlet.hugefile;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.ContentDisposition;
@@ -29,11 +30,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RestController
 public class HugeFileController {
 
+    @Value("${hugefile.path:../ignore-test-files/}")
+    private String filePath;
 
-    String filePath = "../ignore-test-files/";
+    @Value("${hugefile.bufferByteSize:8192}")
+    private int bufferByteSize;
+
+//    String filePath = "../ignore-test-files/";
     String fileName = "150MB";
     String fileExtension = "csv";
-    int bufferByteSize = 8192; // Adjust buffer size as needed
+//    int bufferByteSize = 8192; // Adjust buffer size as needed
 
     // private String filePath = "\"/home/suriya/sample-test-files/\"";
     // private String fileName = "150MB";

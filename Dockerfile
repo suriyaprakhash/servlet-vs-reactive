@@ -58,5 +58,5 @@ RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefres
 # Start the application jar - this is not the uber jar used by the builder
 # This jar only contains application code and references to the extracted jar files
 # This layout is efficient to start up and CDS friendly
-ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "-jar", "application.jar"]
+ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa","-Dhugefile.path=${HUGEFILE_PATH}","-Dhugefile.bufferByteSize=${HUGEFILE_BUFFER_SIZE}","-jar", "application.jar" ]
 EXPOSE 8080

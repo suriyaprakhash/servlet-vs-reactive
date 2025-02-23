@@ -15,6 +15,11 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 
 ### Maven
 
+Run in the parent root folder,
+```
+./mvnw clean package
+```
+builds both **servlet** and **reactive**
 
 ### Docker
 
@@ -28,6 +33,19 @@ Build for **reactive** app,
 docker build --build-arg  PROJECT=reactive -f Dockerfile -t reactive-web-application:1.0 .
 ```
 
+We are using **bind mount**, to bind *C:\Users\suriy\main\ws\Projects\servlet-vs-reactive\ignore-test-files* into the */application/test* directory within the container,
+so when the app runs from the **application** folder - it will just need ./test/
+
+Run for **servlet** app,
+```
+docker run -d --name servlet-app-env -p 8080:8080 -v C:\Users\suriy\main\ws\Projects\servlet-vs-reactive\ignore-test-files:/application/test -e HUGEFILE_PATH=./test/ -e HUGEFILE_BUFFER_SIZE=16000 servlet-web-application:1.0
+```
+
+Run for **reactive** app,
+```
+docker run -d --name reactive-app-env -p 8081:8081 -v C:\Users\suriy\main\ws\Projects\servlet-vs-reactive\ignore-test-files:/application/test -e HUGEFILE_PATH=./test/ -e HUGEFILE_BUFFER_SIZE=16000 reactive-web-application:1.0
+```
+
 ## Test
 
 Check the respective project on how to test them
@@ -35,6 +53,5 @@ Check the respective project on how to test them
 
 # TODO
 
-- Compose Dockerfile & volume in the 150MB file & run both
 - Add DB
 - Write gatling simulation to test volumes
