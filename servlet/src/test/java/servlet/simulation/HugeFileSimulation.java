@@ -5,6 +5,8 @@ import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
+import java.time.Duration;
+
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
@@ -22,7 +24,8 @@ public class HugeFileSimulation extends Simulation {
         );
 
         setUp(
-                user.injectOpen(atOnceUsers(1))
+//                user.injectOpen(atOnceUsers(1)),
+                user.injectOpen(rampUsersPerSec(2).to(10).during(Duration.ofSeconds(10)))
         ).protocols(servletHttp);
     }
 

@@ -83,4 +83,5 @@ Check the respective project on how to test them
 # TODO
 
 - Toxiproxy steps
+- Try adding glowroot into docker 
 - Add DB
