@@ -2,7 +2,6 @@
 
 This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edit)
 
-
 ## Pre-requiste
 
 - Java 21
@@ -11,15 +10,28 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 - toxiproxy - to simulate network latency
 - Make sure you place *150MB.csv* file into the **ignore-test-files** directory in root folder, used for **hugefile** testing
 
-## Build
+## Build & Run
 
 ### Maven
 
-Run in the parent root folder,
+Start the build in the parent root folder,
 ```
 ./mvnw clean package
 ```
 builds both **servlet** and **reactive**
+
+Run **servlet**,
+
+```
+java -XX:SharedArchiveFile=application.jsa -D"hugefile.path"=ignore-test-files/  -jar servlet/target/ServletWebApplication.jar 
+```
+
+Run **reactive**,
+
+```
+java -XX:SharedArchiveFile=application.jsa -D"hugefile.path"=ignore-test-files/  -jar reactive/target/ReactiveWebApplication.jar 
+```
+
 
 ### Docker
 
