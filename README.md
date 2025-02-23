@@ -7,7 +7,8 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 - Java 21
 - Maven
 - [Glowroot](https://glowroot.org/)
-- toxiproxy - to simulate network latency
+- [Gatling](https://gatling.io/)
+- [toxiproxy](https://github.com/Shopify/toxiproxy)
 - Make sure you place *150MB.csv* file into the **ignore-test-files** directory in root folder, used for **hugefile** testing
 
 ## Build & Run

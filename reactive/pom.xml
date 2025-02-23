@@ -48,6 +48,17 @@
           <layout>JAR</layout>
         </configuration>
       </plugin>
+
+
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>${gatling-maven-plugin.version}</version>
+        <configuration>
+          <simulationName>reactive.simulation.HugeFileSimulation</simulationName>
+        </configuration>
+      </plugin>
+
     </plugins>
 
   </build>
