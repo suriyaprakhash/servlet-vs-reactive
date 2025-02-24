@@ -93,29 +93,35 @@ public class HugeFileController {
         headers.setContentLength(new File(filePath + fileName + "." + fileExtension).length());
         StreamingResponseBody stream = outputStream -> {
 
-            int byteRead;
+//            int byteRead;
+//            try (var bis = new BufferedInputStream(new FileInputStream(filePath + fileName + "." + fileExtension),
+//                    bufferByteSize)) {
+//                // gets only one byte so does more read from the stream
+//                while ((byteRead = bis.read()) != -1) {
+//                    outputStream.write(byteRead);
+//                }
+//            }
+
+            int bytesRead; // keeps track of no.of byte filled in the buffer
+            byte[] buffer = new byte[bufferByteSize];
             try (var bis = new BufferedInputStream(new FileInputStream(filePath + fileName + "." + fileExtension),
                     bufferByteSize)) {
-                // gets only one byte so does more read from the stream
-                while ((byteRead = bis.read()) != -1) {
-                    outputStream.write(byteRead);
-                }
-            }
-            outputStream.flush();
-            outputStream.close();
+                // reads the buffer into the array
+                while ((bytesRead = bis.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead); // Write the bytes from the buffer
+                    // this avoids premature closing before the buffered bytes are written
+                    outputStream.flush();
 
-//            int bytesRead; // keeps track of no.of byte filled in the buffer
-//            byte[] buffer = new byte[bufferByteSize];
-//            try (var bis = new BufferedInputStream(new FileInputStream("/home/suriya/sample-test-files/150MB.csv"), bufferByteSize)) {
-//                // reads the buffer into the array
-//                while ((bytesRead = bis.read(buffer)) != -1) {
 //                    // Process the bytes in the buffer
 //                    for (int i = 0; i < bytesRead; i++) {
 //                        outputStream.write(buffer[i]);
 //                    }
-//                }
- //           outputStream.flush();
-//            }
+                }
+            }
+
+            outputStream.flush();
+            outputStream.close();
+
         };
         return ResponseEntity.ok().headers(headers).body(stream);
     }

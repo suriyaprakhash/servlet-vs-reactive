@@ -6,12 +6,32 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 
 - Java 21
 - Maven
-- [Glowroot](https://glowroot.org/)
+- [Glowroot](https://glowroot.org/) (not-mandatory)
 - [Gatling](https://gatling.io/)
-- [toxiproxy](https://github.com/Shopify/toxiproxy)
+- [toxiproxy](https://github.com/Shopify/toxiproxy) (not-mandatory)
 - Make sure you place *150MB.csv* file into the **ignore-test-files** directory in root folder, used for **hugefile** testing
+- Gatling conf - client timeout set to 120 seconds in servlet 
 
 ## Build & Run
+
+### Idea
+
+In the run config,
+
+**servlet** app, **add VM option**,
+```
+-Xmx4g -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist-1\glowroot\glowroot.jar -Dglowroot.agent.port=4001
+```
+
+**reactive** app, **add VM option**,
+```
+-Xmx4g -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist-2\glowroot\glowroot.jar -Dglowroot.agent.port=4002
+```
+here,
+- -Xmx - for max java mem to 4g
+- Glowroot **javaagent jar** location for it pick and **port** it needs to run on
+
+set the right **working directory** - **_set it to the child and not to the parent_**.
 
 ### Maven
 
@@ -79,6 +99,10 @@ Check the respective project on how to test them
 ```
 .\mvnw.cmd --projects=servlet,reactive gatling:test
 ```
+
+### Observation
+
+- Servlet take more time paint
 
 # TODO
 

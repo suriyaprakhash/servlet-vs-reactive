@@ -1,2 +1,18 @@
 server:
   port: 8080
+
+spring:
+  # turn spring boot on virtual thread
+#  threads:
+#    virtual:
+#      enabled: true
+  # Set it to -1 to be open indefinitely until the client closes
+  mvc:
+    async:
+      request-timeout: -1
+# This is for keep-alive header - only for normal calls (check this) - doesn't care for async calls and only for tomcat
+# server.tomcat.keep-alive-timeout=5000
+
+# app property for the file read buffer - comment it out when not used
+#hugefile:
+#  bufferByteSize: 32768
