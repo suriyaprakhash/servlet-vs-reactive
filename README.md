@@ -102,7 +102,9 @@ Check the respective project on how to test them
 
 ### Observation
 
-- Servlet take more time paint
+TODO:
+- Compare normal web request
+- Hugefile
 
 # TODO
 
