@@ -1,6 +1,6 @@
-# Demystifying Blocking vs. Non-Blocking Web Requests
+# Blocking vs Non-blocking benchmark
 
-This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edit)
+This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edit), making it as a bechmarking tool for Spring boot's web and webflux. 
 
 ## Pre-requiste
 
@@ -123,6 +123,7 @@ Check the respective project on how to test them
 
 # TODO
 
-- Toxiproxy steps
-- Try adding glowroot into docker 
+- Toxiproxy - test servlet resource
 - Add DB
+- Try adding glowroot into docker 
+
