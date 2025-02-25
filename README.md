@@ -102,9 +102,24 @@ Check the respective project on how to test them
 
 ### Observation
 
-TODO:
-- Compare normal web request
-- Hugefile
+#### Hugefile
+
+##### Servlet
+
+| HTTP                                     | SUGGESTION                                                                              | OBSERVATION                                                                                            |
+|------------------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Servlet ResponseOutputStream - Read All  | Don't use if you have concurrent calls or memory constraint                             | Reading all bytes will not be able to allocate memory for concurrent calls                             | 
+| Servlet ResponseOutputStream - Buffered  | Does not make use of spring boot capabilities, runs on main thread clogging new request | Write is slow for concurrent calls - might timeout for a file 150MB given 120 sec for concurrent calls |
+| Servlet StreamingResponseBody - Buffered | Creates async response thread, so the new req will not clog                             | Write is slow for concurrent calls - might timeout for a file 150MB given 120 sec for concurrent calls |
+| Servlet Resource                         | TODO - test with toxiproxy                                                              | TODO - test with toxiproxy                                                                             |
+
+##### Servlet vs Reactive
+| HTTP                                    | SUGGESTION                                    | OBSERVATION                                   |
+|-----------------------------------------|-----------------------------------------------|-----------------------------------------------|
+| Servlet Resource                        | TODO - test with toxiproxy                    | TODO - test with toxiproxy                    | 
+| Servlet ResponseOutputStream - Buffered | TODO - test against reactive                  | TODO - test against reactive                  |
+| Reactive Stream                         | TODO - test against servlet buffered/resource | TODO - test against servlet buffered/resource |
+
 
 # TODO
 

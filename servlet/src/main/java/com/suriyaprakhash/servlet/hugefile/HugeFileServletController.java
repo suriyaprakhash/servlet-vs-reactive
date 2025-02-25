@@ -3,6 +3,7 @@ package com.suriyaprakhash.servlet.hugefile;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,17 @@ import java.nio.file.Paths;
 @RestController
 public class HugeFileServletController {
 
+    @Value("${hugefile.path:../ignore-test-files/}")
+    private String filePath;
+
+    @Value("${hugefile.bufferByteSize:8192}")
+    private int bufferByteSize;
+
+    //    String filePath = "../ignore-test-files/";
+    String fileName = "150MB";
+    String fileExtension = "csv";
+//    int bufferByteSize = 8192; // Adjust buffer size as needed
+
     /**
      * This does not work with just reactor Netty - since HttpServletResponse is from tomcat
      *
@@ -30,9 +42,9 @@ public class HugeFileServletController {
      */
     @GetMapping(value="bio/read-all")
     public void getHugeFileReadAll(HttpServletResponse httpServletResponse) throws IOException {
-        Path filePath = Paths.get("/home/suriya/sample-test-files/150MB.csv");
+        Path filePath = Paths.get(this.filePath).resolve(fileName + "." + fileExtension).normalize();
         byte[] bytes = Files.readAllBytes(filePath);
-        httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=150MB.csv");
+        httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + "." + fileExtension);
         for (byte aByte : bytes) {
             httpServletResponse.getWriter().write(aByte);
         }
@@ -48,16 +60,15 @@ public class HugeFileServletController {
      * @throws IOException
      */
     @GetMapping(value="bio/buffered")
-    public void getHugeFileBio1(HttpServletResponse httpServletResponse) throws IOException {
-        int bufferByteSize = 1024; // Adjust buffer size as needed
+    public void getHugeFileBioBuffered(HttpServletResponse httpServletResponse) throws IOException {
         int bytesRead; // keeps track of no.of byte filled in the buffer
         byte[] buffer = new byte[bufferByteSize];
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("/home/suriya/sample-test-files/150MB.csv"), bufferByteSize)) {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filePath + fileName + "." + fileExtension), bufferByteSize)) {
             while ((bytesRead = bis.read(buffer)) != -1) {
                 // Process the bytes in the buffer
                 for (int i = 0; i < bytesRead; i++) {
                     httpServletResponse.getWriter().write(buffer[i]);
-                    httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=150MB.csv");
+                    httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + "." + fileExtension);
                 }
             }
         }

@@ -18,9 +18,30 @@ public class HugeFileSimulation extends Simulation {
                         .get("/hugefile/bio/stream")
         );
 
+        ChainBuilder bioResource = exec(
+                http("BIO resource")
+                        .get("/hugefile/bio/resource")
+        );
+
+        ChainBuilder bioServletReadAll = exec(
+                http("BIO Servlet Read All")
+                        .get("/hugefile/servlet/bio/read-all")
+        );
+
+        ChainBuilder bioServletBuffered = exec(
+                http("BIO Servlet Buffered")
+                        .get("/hugefile/servlet/bio/buffered")
+        );
+
         ScenarioBuilder user = scenario("User").exec(
+                bioServletBuffered,
+                pause(5),
+                bioServletReadAll,
+                pause(5),
                 bioStream,
-                pause(1)
+                pause(5),
+                bioResource
+
         );
 
         setUp(
