@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @Slf4j
 @RequestMapping("/hugefile/servlet")
 @RestController
-public class HugeFileServletController {
+public class HugeFileOldWayController {
 
     @Value("${hugefile.path:../ignore-test-files/}")
     private String filePath;

@@ -5,12 +5,9 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/db")
+@RequestMapping("/db-bio")
 @RestController
 public class ProductController {
 
@@ -29,6 +26,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Void> addProduct(Product product) {
         productService.addProduct(product);
+        return  ResponseEntity.accepted().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateProduct(Product product) {
+        productService.updateProduct(product);
         return  ResponseEntity.accepted().build();
     }
 }

@@ -1,8 +1,14 @@
 package com.suriyaprakhash.reactive.db.product;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
+@Slf4j
 @Service
 public class ProductService {
 
@@ -17,7 +23,25 @@ public class ProductService {
     }
 
     public void addProduct(Product product) {
-        productRepository.save(product);
+        product.setNewProduct(true);
+        product.setId(UUID.randomUUID());
+        productRepository.save(product)
+//                .log("about to add product")
+                .subscribe(savedProduct -> {
+            log.info("Product saved: " + savedProduct);
+        });
+    }
+
+    public Mono<Product> updateProduct(Product product) {
+        product.setNewProduct(false);
+        return productRepository.existsById(product.getId())
+//                .log("about to update product")
+                .flatMap(exists -> {
+                    if (!exists) {
+                        throw new NoSuchElementException("Product not found");
+                    }
+                    return productRepository.save(product);
+                });
     }
 
 }

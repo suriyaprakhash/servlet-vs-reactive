@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RequestMapping("/hugefile")
 @RestController
-public class HugeFileController {
+public class HugeFileStreamController {
 
     @Value("${hugefile.path:../ignore-test-files/}")
     private String filePath;

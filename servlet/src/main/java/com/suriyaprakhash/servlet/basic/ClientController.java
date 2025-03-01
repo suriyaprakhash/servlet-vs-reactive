@@ -1,4 +1,4 @@
-package com.suriyaprakhash.servlet.rest;
+package com.suriyaprakhash.servlet.basic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;

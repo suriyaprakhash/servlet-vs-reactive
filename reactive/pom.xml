@@ -24,23 +24,13 @@
 
   <dependencies>
 
+    <!-- this is webflux openapi ui-->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
       <version>${springdoc-openapi-starter-webflux-ui.version}</version>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>org.springdoc</groupId>-->
-<!--      <artifactId>springdoc-openapi-webflux-ui</artifactId>-->
-<!--      <version>${springdoc-openapi-webflux-ui.version}</version>-->
-<!--    </dependency>-->
-
-<!--    <dependency>-->
-<!--      <groupId>org.springdoc</groupId>-->
-<!--      <artifactId>springdoc-openapi-webflux-core</artifactId>-->
-<!--      <version>${springdoc-openapi-webflux-ui.version}</version>-->
-<!--    </dependency>-->
 
     <!-- brings in reactive netty server-->
     <dependency>

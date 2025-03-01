@@ -2,9 +2,13 @@ server:
   port: 8081
 
 spring:
+  # this is for handling API error handlers
+  mvc:
+    problemdetails:
+      enabled: true
   # connection info to connect to the DB
   r2dbc:
-    url: r2dbc:postgresql://postgres:5432/shopit?schema=public
+    url: r2dbc:postgresql://localhost:5432/shopit?schema=public
     username: postgres
     password: test
   # tells the jpa to use hibernate to create/update tables to match with the code schema

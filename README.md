@@ -147,6 +147,13 @@ Comparing servlet stream against the reactive,
 **Reactive app**,
 - Swagger somehow is not working with **2.8.x** with spring webflux starter **3.4.x**
 
+### Inconveniences
+
+- Table annotations - different from entities
+- Slf4j - is not as same in the servlet (needs logback) to write the logs using **log.info**
+- @Id - cannot insert new record, needs @Persistable interface
+- Generated value doesn't work with UUID
+
 # TODO
 
 - Calculate DB perf
