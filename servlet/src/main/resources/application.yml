@@ -2,6 +2,15 @@ server:
   port: 8080
 
 spring:
+  # connection info to connect to the DB
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shopit?schema=public
+    username: postgres
+    password: test
+  # tells the jpa to use hibernate to create/update tables to match with the code schema
+  jpa:
+    hibernate:
+      ddl-auto: update
   # turn spring boot on virtual thread
 #  threads:
 #    virtual:
@@ -13,6 +22,8 @@ spring:
 # This is for keep-alive header - only for normal calls (check this) - doesn't care for async calls and only for tomcat
 # server.tomcat.keep-alive-timeout=5000
 
+
 # app property for the file read buffer - comment it out when not used
 #hugefile:
 #  bufferByteSize: 32768
+
