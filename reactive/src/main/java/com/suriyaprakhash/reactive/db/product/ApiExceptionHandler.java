@@ -15,38 +15,12 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @ExceptionHandler(value = { NoSuchElementException.class })
-//    protected ResponseEntity<Object> elementNotFound(
-//            RuntimeException ex, ServerWebExchange exchang) {
-//        String bodyOfResponse = "The requested product does not exist";
-//        return handleExceptionInternal(ex, bodyOfResponse,
-//                new HttpHeaders(), HttpStatus.NOT_FOUND, exchang).block();
-//    }
-
     @ExceptionHandler(NoSuchElementException.class)
     public Mono<ResponseEntity<Map<String, String>>> handleApiException(NoSuchElementException ex, ServerWebExchange exchange) {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", ex.getMessage());
         return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse));
     }
-
-//    @ExceptionHandler(WebExchangeBindException.class)
-//    public Mono<ResponseEntity<Map<String, Object>>> handleValidationException(WebExchangeBindException ex, ServerWebExchange exchange) {
-//        Map<String, Object> errors = new HashMap<>();
-//        ex.getFieldErrors().forEach(fieldError ->
-//                errors.put(fieldError.getField(), fieldError.getDefaultMessage())
-//        );
-//        return Mono.just(ResponseEntity.badRequest().body(errors));
-//    }
-//
-//    @ExceptionHandler(Exception.class)
-//    public Mono<ResponseEntity<Map<String, String>>> handleGenericException(Exception ex, ServerWebExchange exchange) {
-//        Map<String, String> errorResponse = new HashMap<>();
-//        errorResponse.put("error", "An unexpected error occurred.");
-//        ex.printStackTrace(); // Log the exception for debugging
-//        return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse));
-//    }
-
 
     @ExceptionHandler(Exception.class)
     public Mono<ResponseEntity<String>> handleGenericException(Exception ex, ServerWebExchange exchange) {

@@ -156,6 +156,11 @@ Comparing servlet stream against the reactive,
 
 # TODO
 
-- Calculate DB perf
-- Try adding glowroot into docker 
+- Gatling tests for DB
+- Check how the perf of Servlet DB and Reactive DB
+
+Extra,
+- Move it to docker for perf test
+- Try adding glowroot into docker
+- Try adding join inventory table
 
