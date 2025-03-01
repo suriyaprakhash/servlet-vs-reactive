@@ -1,8 +1,7 @@
-package com.suriyaprakhash.servlet.db;
+package com.suriyaprakhash.servlet.db.product;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 import java.util.UUID;
 

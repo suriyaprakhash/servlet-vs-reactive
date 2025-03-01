@@ -6,11 +6,12 @@ This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edi
 
 - Java 21
 - Maven
-- [Glowroot](https://glowroot.org/) (not-mandatory)
+- [Postgres](https://www.postgresql.org/)
 - [Gatling](https://gatling.io/)
-- [toxiproxy](https://github.com/Shopify/toxiproxy) (not-mandatory)
 - Make sure you place *150MB.csv* file into the **ignore-test-files** directory in root folder, used for **hugefile** testing
 - Gatling conf - client timeout set to 120 seconds in servlet 
+- [Glowroot](https://glowroot.org/) (not-mandatory)
+- [toxiproxy](https://github.com/Shopify/toxiproxy) (not-mandatory)
 
 ## Build & Run
 
@@ -92,6 +93,20 @@ here,
 - -v - bind mount - host_path:container_path
 - -e - Spring @Value property for path in the application
 
+## Swagger
+
+Access **swagger**,
+
+Servlet app,
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+Reactive app,
+```
+http://localhost:8081/webjars/swagger-ui/index.html
+```
+
 ## Gatling tests 
 
 Check the respective project on how to test them
@@ -102,9 +117,11 @@ Check the respective project on how to test them
 
 ### Observation
 
-#### Hugefile
+#### Dataabse IO
 
-##### Servlet
+#### Hugefile IO
+
+Just with web servlet,
 
 | HTTP                                     | SUGGESTION                                                                              | OBSERVATION                                                                                            |
 |------------------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
@@ -113,7 +130,8 @@ Check the respective project on how to test them
 | Servlet StreamingResponseBody - Buffered | Creates async response thread, so the new req will not clog                             | Write is slow for concurrent calls - might timeout for a file 150MB given 120 sec for concurrent calls |
 | Servlet Resource                         | TODO - test with toxiproxy                                                              | TODO - test with toxiproxy                                                                             |
 
-##### Servlet vs Reactive
+Comparing servlet stream against the reactive, 
+
 | HTTP                                    | SUGGESTION                                    | OBSERVATION                                   |
 |-----------------------------------------|-----------------------------------------------|-----------------------------------------------|
 | Servlet Resource                        | TODO - test with toxiproxy                    | TODO - test with toxiproxy                    | 
@@ -121,9 +139,16 @@ Check the respective project on how to test them
 | Reactive Stream                         | TODO - test against servlet buffered/resource | TODO - test against servlet buffered/resource |
 
 
+## Known Issues
+
+**Servlet app**,
+- When using Glowroot in debug mode - https://youtrack.jetbrains.com/issue/IDEA-360896/java.lang.IncompatibleClassChangeError-Class-ch.qos.logback.classic.Level-does-not-implement-the-requested-interface
+
+**Reactive app**,
+- Swagger somehow is not working with **2.8.x** with spring webflux starter **3.4.x**
+
 # TODO
 
-- Toxiproxy - test servlet resource
-- Add DB
+- Calculate DB perf
 - Try adding glowroot into docker 
 

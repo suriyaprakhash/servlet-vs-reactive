@@ -1,4 +1,4 @@
-package com.suriyaprakhash.servlet.db;
+package com.suriyaprakhash.servlet.db.product;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,9 @@
-package com.suriyaprakhash.reactive.db;
+package com.suriyaprakhash.servlet.db.product;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
+
 
 @Service
 public class ProductService {
@@ -12,8 +14,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Flux<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public void addProduct(Product product) {

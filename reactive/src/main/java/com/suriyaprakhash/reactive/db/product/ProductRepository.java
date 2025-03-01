@@ -1,4 +1,4 @@
-package com.suriyaprakhash.reactive.db;
+package com.suriyaprakhash.reactive.db.product;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 

@@ -1,5 +1,4 @@
-package com.suriyaprakhash.reactive.db;
-
+package com.suriyaprakhash.reactive.db.product;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,11 +8,10 @@ import java.util.UUID;
 
 @Table
 @Data
-public class Inventory {
+public class Product {
 
     @Id
     private UUID id;
-    private Product product;
-    private int quantity;
-
+    private String name;
+    private String description;
 }

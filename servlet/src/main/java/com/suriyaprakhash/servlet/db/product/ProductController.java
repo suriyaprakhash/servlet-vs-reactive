@@ -1,8 +1,7 @@
-package com.suriyaprakhash.servlet.db;
+package com.suriyaprakhash.servlet.db.product;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
