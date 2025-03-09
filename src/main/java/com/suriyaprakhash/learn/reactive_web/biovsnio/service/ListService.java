@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 @Service
 public class ListService {
 
-    private final List<String> stringList = List.of(new String[]{"one", "two", "three", "four", "five", "six", "seven"});
+    private final List<String> stringList = List.of(new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"});
 
     public List<String> getListBio() {
         log.info("bio service started");
@@ -20,7 +20,7 @@ public class ListService {
                 .mapToObj(index -> {
                     try {
                         log.info("bio waiting {}", index);
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

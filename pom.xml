@@ -40,17 +40,36 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- for metrics and traces-->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing</artifactId>
-        </dependency>
+        <!-- for trace in log - needs tracking bridge either brave or otel along with actuator -->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-tracing-bridge-otel</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-tracing-bom</artifactId>-->
+<!--            <version>1.4.3</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-tracing</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
+        <!-- this is needed for webflux trace-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-observation</artifactId>-->
+<!--        </dependency>-->
+
 
         <!-- for nio reactor netty web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--        </dependency>-->
 
         <!-- for bio tomcat web -->
         <dependency>
@@ -125,7 +144,8 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling-maven-plugin.version}</version>
                 <configuration>
-                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.HugeFileSimulationBioStream</simulationClass>
+<!--                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.HugeFileSimulationBioStream</simulationClass>-->
+                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.ClientServer</simulationClass>
                 </configuration>
             </plugin>
 

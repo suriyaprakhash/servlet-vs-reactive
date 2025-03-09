@@ -23,20 +23,20 @@ public class ClientController {
     String BIO_URL = "http://localhost:8081/server/bio";
     WebClient webClient = WebClient.create();
 
-    @GetMapping("bio")
-    public String getBio() {
-        log.info("bio client request entered controller");
+    @GetMapping("mono")
+    public String mono() {
+        log.info("Mono client request entered controller");
         Mono<List<String>> retreivedMono = webClient.get().uri(BIO_URL).accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<>() {
                 });
 
-        // i) using block
-        List<String> dataList = retreivedMono.block();
+        // i) using block - blocks and uses the same http thread
+//        List<String> dataList = retreivedMono.block();
         // the following is printed only after dataList is available
-        log.info("i) Client - Netty collected (blocked) {}", dataList);
+//        log.info("i) Client - Netty collected (blocked) {}", dataList);
 
-        // ii) using subscribe
+        // ii) using subscribe - spins a async forkJoin thread
         retreivedMono.subscribe(data -> {
             log.info("ii) Client - Netty collected {}", data);
         });
@@ -44,10 +44,10 @@ public class ClientController {
         return "Check the client logs for 'Client - Netty collected'";
     }
 
-    @GetMapping("nio")
+    @GetMapping("flux")
     @ResponseBody
-    public String getNio() {
-        log.info("nio client request entered controller");
+    public String flux() {
+        log.info("Flux client request entered controller");
         Flux<String> updatedFlux = webClient.get().uri(NIO_URL).accept(MediaType.TEXT_EVENT_STREAM)
                 .exchangeToFlux(response -> {
                     return response.bodyToFlux(String.class);
@@ -55,7 +55,6 @@ public class ClientController {
 //        updatedFlux.log().buffer(1).subscribe(data -> {
 //            log.info("Client - Netty collected {}", data);
 //        });
-
         updatedFlux.subscribe(data -> {
             log.info("Client - Netty collected {}", data);
         });
