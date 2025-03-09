@@ -20,7 +20,7 @@ public class ClientServer extends Simulation  {
     // Scenario Definition
     private ChainBuilder flux =
             exec(http("Flux call to receive items")
-                    .get("client/forkjoin"));
+                    .get("client/flux"));
 
 
     private ScenarioBuilder loadTestUser = scenario("load test user").exec(flux);

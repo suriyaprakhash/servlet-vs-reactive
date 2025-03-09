@@ -25,7 +25,7 @@ java -Dserver.port=8081  -jar .\target\servlet-vs-reactive.jar
 
 ## Testing requests with Gatling
 
-The test only runs one endpoint - Change it to run the desired endpoint
+The test only runs one endpoint - **Change it to run the desired endpoint**
 
 ```
 mvnw gatling:test
