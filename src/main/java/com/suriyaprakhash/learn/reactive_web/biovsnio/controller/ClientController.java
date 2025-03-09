@@ -1,6 +1,7 @@
 package com.suriyaprakhash.learn.reactive_web.biovsnio.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ForkJoinPool;
 
 @Slf4j
 @RequestMapping("client")
@@ -26,6 +28,8 @@ public class ClientController {
     WebClient webClient = WebClient.create();
     RestTemplate restTemplate = new RestTemplate();
 
+    private final ForkJoinPool forkJoinPool = new ForkJoinPool();
+
     @GetMapping("mvc")
     public String mvc() {
         log.info("MVC client request entered controller");
@@ -34,7 +38,7 @@ public class ClientController {
                 null, typeReference).getBody();
         assert mvc != null;
         log.info("Mono client response received {}", mvc.toString());
-        return "Check the client logs for 'Client - MVC collected'";
+        return "Check the client logs for 'Client - MVC blocked and collected'";
     }
 
     @GetMapping("mono")
@@ -65,7 +69,7 @@ public class ClientController {
 //            log.info("ii) Client - Netty collected {}", data);
 //        });
 
-        return "Check the client logs for 'Client - Netty collected'";
+        return "Check the client logs for 'Client - Mono initiated'";
     }
 
     @GetMapping("flux")
@@ -83,7 +87,22 @@ public class ClientController {
         updatedFlux.subscribe(data -> {
             log.info("{} Client - Netty collected {}", uuid,  data);
         });
-        return "Check the client logs for 'Client - Flux collected'";
+        return "Check the client logs for 'Client - Flux initiated'";
+    }
+
+
+
+    @GetMapping("/forkjoin")
+    public String forkJoin() {
+        String uuid = UUID.randomUUID().toString();
+        log.info("{} ForkJoin client request entered controller", uuid);
+        // Submit an asynchronous task to the ForkJoinPool
+        forkJoinPool.submit(() -> {
+            // Perform some time-consuming operation here
+            log.info("ForkJoin Task executed by: {} {}", Thread.currentThread().getName(), uuid);
+        });
+
+        return "Check the client logs for 'Client - ForkJoin initiated'";
     }
 
 }
