@@ -144,7 +144,6 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling-maven-plugin.version}</version>
                 <configuration>
-<!--                    <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.HugeFileSimulationBioStream</simulationClass>-->
                     <simulationClass>com.suriyaprakhash.learn.reactive_web.simulation.ClientServer</simulationClass>
                 </configuration>
             </plugin>

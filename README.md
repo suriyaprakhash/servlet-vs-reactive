@@ -1,28 +1,17 @@
-# Demystifying Blocking vs. Non-Blocking Web Requests
+# Blocking vs Non-blocking behavior
 
 This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edit)
 
 ## Run
 
-- Run the following for JFR,
+- Run the SERVER at
 ```
-java -Dserver.port=8081 -XX:StartFlightRecording=duration=200s,filename=flight.jfr -jar .\target\servlet-vs-reactive.jar
-```
-
-- Run with glowroot,
-```
-java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -jar .\target\servlet-vs-reactive.jar
+java -Dserver.port=8081  -jar .\target\servlet-vs-reactive.jar
 ```
 
-- With both,
+- Run the CLIENT at
 ```
-java -javaagent:C:\Users\suriy\main\Softwares\Installed\glowroot-0.14.2-dist\glowroot\glowroot.jar -XX:StartFlightRecording=duration=60s,filename=flight.jfr -jar .\target\servlet-vs-reactive.jar
-```
-
-## Load with Gatling
-
-```
-mvnw gatling:test
+java -Dserver.port=8081  -jar .\target\servlet-vs-reactive.jar
 ```
 
 ## How to test
@@ -32,47 +21,12 @@ mvnw gatling:test
 - The project has client and server controller
 - Run the client at 8080 and server at 8081
 - Make the browser call to the client APIs - which inturn calls the server API
-- Comment the desired Web container (tomcat/netty) based on your testing to test the __bio__ and __nio__
+- Comment the desired Web container (tomcat/netty) based on your testing to test the client's __mvc__, __mono__ and __flux__
 
+## Testing requests with Gatling
 
-## OLD MISC
+The test only runs one endpoint - Change it to run the desired endpoint
 
-### Tested
-
-- If you remove **spring-boot-starter-web** from pom (ie. tomcat) and just have **webflux netty** _client/bio_ calls fail throwing
 ```
-java.lang.IllegalStateException: block()/blockFirst()/blockLast() are blocking, which is not supported in thread reactor-http-epoll-2
+mvnw gatling:test
 ```
-- Tomcat web - does not stream event message one by one to the browser
-- Netty streams one by one
-
-### Hugefile
-
-- Run the application with GLOWROOT, JFR
-- Run the gatling sim
-- Flip the **simulationClass** in the pom between *bio* and *nio*
-- Check against /stream vs /nio call in the File IO and Socket IO - and check **Transaction** graph in **glowroot**
-
-#### Observation
-
-##### BIO stream
-
-- Inverted parallelism - more GC parallel thread waited for IO operation or CPU resulting. Refer [hugefile bio stream jfr](./docs/hugefile/hugefile-bio-stream-over-30-sec.jfr)
-- Method profiling - OutputStream buffer write lock, probably due to writing 1 byte at a time
-- The Read IO and Socket IO - could tell a little bit about how much is read at a particular snapshot - but it does not tell the whole pic since the profiler takes snapshots at certain time based on the config
-
-## TODO: Enhancement from here
-
-- Test file disk read and write
-- Test security configuration
-- Update the docker compose - and use watcher
-
-### TODO
-
-- Need to read the text stream from the client's web client - tats still failing
-- **reactor-http-epoll-9** thread is waits until the current API finishes - need to test it with large volume of
-  request, so that we can see if the same thread is being used in two different places. try replacing thread.sleep as
-  well.
-- Investigate on how non-blocking works in netty even though it feels like a blocking call (EVENT LOOP)
-
-
