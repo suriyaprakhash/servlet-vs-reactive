@@ -1,4 +1,4 @@
-# Demystifying Blocking vs. Non-Blocking Web Requests
+# Just servlet vs reactor HUGEFILE
 
 This corresponds to the medium post [here](https://medium.com/p/ef95ca9f02b7/edit)
 
