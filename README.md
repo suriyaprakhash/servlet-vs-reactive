@@ -34,11 +34,23 @@ mvnw gatling:test
 - Make the browser call to the client APIs - which inturn calls the server API
 - Comment the desired Web container (tomcat/netty) based on your testing to test the __bio__ and __nio__
 
+
+## OLD MISC
+
+### Tested
+
+- If you remove **spring-boot-starter-web** from pom (ie. tomcat) and just have **webflux netty** _client/bio_ calls fail throwing
+```
+java.lang.IllegalStateException: block()/blockFirst()/blockLast() are blocking, which is not supported in thread reactor-http-epoll-2
+```
+- Tomcat web - does not stream event message one by one to the browser
+- Netty streams one by one
+
 ### Hugefile
 
 - Run the application with GLOWROOT, JFR
 - Run the gatling sim
-- Flip the **simulationClass** in the pom between *bio* and *nio* 
+- Flip the **simulationClass** in the pom between *bio* and *nio*
 - Check against /stream vs /nio call in the File IO and Socket IO - and check **Transaction** graph in **glowroot**
 
 #### Observation
@@ -54,18 +66,6 @@ mvnw gatling:test
 - Test file disk read and write
 - Test security configuration
 - Update the docker compose - and use watcher
-
-
-## OLD MISC
-
-### Tested
-
-- If you remove **spring-boot-starter-web** from pom (ie. tomcat) and just have **webflux netty** _client/bio_ calls fail throwing
-```
-java.lang.IllegalStateException: block()/blockFirst()/blockLast() are blocking, which is not supported in thread reactor-http-epoll-2
-```
-- Tomcat web - does not stream event message one by one to the browser
-- Netty streams one by one
 
 ### TODO
 

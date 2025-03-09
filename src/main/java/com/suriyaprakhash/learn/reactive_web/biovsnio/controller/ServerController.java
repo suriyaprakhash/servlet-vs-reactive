@@ -21,6 +21,10 @@ public class ServerController {
     private ListService listService;
 
 
+    /**
+     * This method represent the web mvc response - with application/json
+     * @return
+     */
     @GetMapping(value = "bio", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> getBio() {
         List<String> updatedList = listService.getListBio();
@@ -29,6 +33,10 @@ public class ServerController {
         return updatedList;
     }
 
+    /**
+     * This method represent the web flux - with text/event-stream
+     * @return
+     */
     // NOTE:- MediaType.TEXT_EVENT_STREAM_VALUE is being used to stream the events as text
     @GetMapping(value = "nio", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getNio() {
