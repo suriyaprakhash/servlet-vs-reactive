@@ -78,16 +78,21 @@ public class ClientController {
         String uuid = UUID.randomUUID().toString();
         log.info("{} Flux client request entered controller", uuid);
         Flux<String> updatedFlux = webClient.get().uri(NIO_URL).accept(MediaType.TEXT_EVENT_STREAM)
-                .exchangeToFlux(response -> {
-                    return response.bodyToFlux(String.class);
-                });
+                .exchangeToFlux(response -> response.bodyToFlux(String.class));
 //        updatedFlux.log().buffer(1).subscribe(data -> {
-//            log.info("Client - Netty collected {}", data);
+//            log.info("Client - Flux collected {}", data);
 //        });
         updatedFlux.subscribe(data -> {
-            log.info("{} Client - Netty collected {}", uuid,  data);
+            log.info("{} Client - Flux collected {}", uuid,  data);
         });
         return "Check the client logs for 'Client - Flux initiated'";
+
+
+//        return updatedFlux.map(data -> {
+//            log.info("{} Client - Netty collected {}", uuid,  data);
+//            return data;
+//        });
+
     }
 
 
