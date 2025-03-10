@@ -37,7 +37,7 @@ public class ClientController {
         List<String> mvc = restTemplate.exchange(BIO_URL, org.springframework.http.HttpMethod.GET,
                 null, typeReference).getBody();
         assert mvc != null;
-        log.info("Mono client response received {}", mvc.toString());
+        log.info("MVC client response received {}", mvc.toString());
         return "Check the client logs for 'Client - MVC blocked and collected'";
     }
 
