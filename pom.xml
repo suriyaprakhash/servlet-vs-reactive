@@ -66,7 +66,10 @@
 
 
         <!-- for nio reactor netty web -->
-<!--0cca5deb-d534-4ae9-80cf-3e31f29f0ade-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
+        <!--        </dependency>-->
 
         <!-- for bio tomcat web -->
         <dependency>
