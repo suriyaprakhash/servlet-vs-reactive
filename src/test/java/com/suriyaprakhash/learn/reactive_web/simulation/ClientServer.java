@@ -28,7 +28,7 @@ public class ClientServer extends Simulation  {
     // Load simulation
     {
         setUp(
-                loadTestUser.injectOpen(rampUsers(60).during(Duration.ofSeconds(30)))
+                loadTestUser.injectOpen(rampUsers(10).during(Duration.ofSeconds(1)))
         ).protocols(httpProtocolBuilder);
     }
 }

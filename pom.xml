@@ -66,10 +66,10 @@
 
 
         <!-- for nio reactor netty web -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
-        <!--        </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--            </dependency>-->
 
         <!-- for bio tomcat web -->
         <dependency>
@@ -116,6 +116,7 @@
     <build>
         <finalName>${project.name}</finalName>
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

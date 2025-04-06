@@ -41,6 +41,48 @@ public class ClientController {
         return "Check the client logs for 'Client - MVC blocked and collected'";
     }
 
+
+    @GetMapping("flux")
+    @ResponseBody
+    public String flux() {
+        String uuid = UUID.randomUUID().toString();
+        log.info("{} {} Flux client request entered controller", uuid, Thread.currentThread());
+        Flux<String> updatedFlux = webClient.get().uri(NIO_URL)
+//                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchangeToFlux(response -> response.bodyToFlux(String.class));
+//        updatedFlux.log().buffer(1).subscribe(data -> {
+//            log.info("Client - Flux collected {}", data);
+//        });
+        updatedFlux.subscribe(data -> {
+            log.info("{} {} Client - Flux collected {}", uuid, Thread.currentThread(), data);
+        });
+
+        log.info("{} {} Flux client request - after subscription block", uuid, Thread.currentThread());
+        return  "Check the client logs for 'Client - Flux initiated'";
+
+
+//        return updatedFlux.map(data -> {
+//            log.info("{} Client - Netty collected {}", uuid,  data);
+//            return data;
+//        });
+
+    }
+
+ /// FORK JOIN AND MONO TEST //////////////////////////////////////////////////////////////////
+
+    @GetMapping("/forkjoin")
+    public String forkJoin() {
+        String uuid = UUID.randomUUID().toString();
+        log.info("{} ForkJoin client request entered controller", uuid);
+        // Submit an asynchronous task to the ForkJoinPool
+        forkJoinPool.submit(() -> {
+            // Perform some time-consuming operation here
+            log.info("ForkJoin Task executed by: {} {}", Thread.currentThread().getName(), uuid);
+        });
+
+        return "Check the client logs for 'Client - ForkJoin initiated'";
+    }
+
     @GetMapping("mono")
     public String mono() {
         log.info("Mono client request entered controller");
@@ -70,44 +112,6 @@ public class ClientController {
 //        });
 
         return "Check the client logs for 'Client - Mono initiated'";
-    }
-
-    @GetMapping("flux")
-    @ResponseBody
-    public String flux() {
-        String uuid = UUID.randomUUID().toString();
-        log.info("{} Flux client request entered controller", uuid);
-        Flux<String> updatedFlux = webClient.get().uri(NIO_URL).accept(MediaType.TEXT_EVENT_STREAM)
-                .exchangeToFlux(response -> response.bodyToFlux(String.class));
-//        updatedFlux.log().buffer(1).subscribe(data -> {
-//            log.info("Client - Flux collected {}", data);
-//        });
-        updatedFlux.subscribe(data -> {
-            log.info("{} Client - Flux collected {}", uuid,  data);
-        });
-        return "Check the client logs for 'Client - Flux initiated'";
-
-
-//        return updatedFlux.map(data -> {
-//            log.info("{} Client - Netty collected {}", uuid,  data);
-//            return data;
-//        });
-
-    }
-
-
-
-    @GetMapping("/forkjoin")
-    public String forkJoin() {
-        String uuid = UUID.randomUUID().toString();
-        log.info("{} ForkJoin client request entered controller", uuid);
-        // Submit an asynchronous task to the ForkJoinPool
-        forkJoinPool.submit(() -> {
-            // Perform some time-consuming operation here
-            log.info("ForkJoin Task executed by: {} {}", Thread.currentThread().getName(), uuid);
-        });
-
-        return "Check the client logs for 'Client - ForkJoin initiated'";
     }
 
 }

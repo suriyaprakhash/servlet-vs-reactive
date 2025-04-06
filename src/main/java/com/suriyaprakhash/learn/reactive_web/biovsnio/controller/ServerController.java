@@ -38,7 +38,8 @@ public class ServerController {
      * @return
      */
     // NOTE:- MediaType.TEXT_EVENT_STREAM_VALUE is being used to stream the events as text
-    @GetMapping(value = "nio", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+//    @GetMapping(value = "nio", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "nio")
     public Flux<String> getNio() {
         Flux<String> updatedFlux = listService.getListNio();
         log.info("Server Ctrl - Netty collected {}", updatedFlux.count());
